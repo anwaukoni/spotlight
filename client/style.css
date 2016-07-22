@@ -48,7 +48,7 @@ body {
 #top-left-feedback, #top-right-feedback,
 #bottom-left-feedback, #bottom-right-feedback {
   position: absolute;
-  width: 120px;
+  width: 200px;
   height: 120px;
   display: flex;
   justify-content: center;
