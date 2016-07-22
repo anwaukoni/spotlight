@@ -1,7 +1,30 @@
-<!-- Note that each template you add should include the partial templates -->
-<!-- header and footer, if you don't need to add any new things to the head -->
-<%- include('templates/header') %>
-<div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Shooter</title>
+  <link rel="stylesheet" type="text/css" href="./../style.css">
+</head>
+
+<body>
+
+<div id='game-wrap'>
   <h1>Salve, Munde!</h1>
+  <p id='nonce-container'></p>
+  <p id='initialization-data'></p>
+
+  <div id='top-left' class='calibrate-me'></div>
+  <div id='top-right'></div>
+  <div id='bottom-left'></div>
+  <div id='bottom-right'></div>
+
+  <div id='top-left-feedback'>-</div>
+  <div id='top-right-feedback'>-</div>
+  <div id='bottom-left-feedback'>-</div>
+  <div id='bottom-right-feedback'>-</div>
 </div>
-<%- include('templates/footer') %>
+
+</body>
+  <script src='./dist/imperio.min.js'></script>
+  <script src='./desktop.js'></script>
+</html>

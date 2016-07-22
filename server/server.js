@@ -4,40 +4,47 @@ const app = express();
 const server = require('http').Server(app); // eslint-disable-line
 const port = process.env.PORT || 3000;
 const path = require('path');
-
-// ****************** READ THIS, TEAM IMPERIO!! *************************
-// Uncomment or edit these lines to refer to the desired library version:
-// **********************************************************************
-// Path to npm module:
 // const imperio = require('imperio')(server);
-// Path to local (in-development) version of the repository
 const imperio = require('./../../imperioDev/index.js')(server);
-
-// ****************** READ THIS, TEAM IMPERIO!! *************************
-// You need to adjust the path to the desired front-end build, like above
-//  Should lead to the ROOT directory of the imperio library (not /dist)
-// **********************************************************************
-// Path to npm module:
-// app.use(express.static(path.join(`${__dirname}/../node_modules/imperio`)));
-// Path to local (in-development) version of the repository
-app.use(express.static(path.join(`${__dirname}/../../imperioDev`)));
 
 /* ----------------------------------
  * -----   Global Middleware   ------
  * ---------------------------------- */
 
+// app.use(express.static(path.join(`${__dirname}/../node_modules/imperio`)));
+app.use(express.static(path.join(`${__dirname}/../../imperioDev`)));
 app.use(express.static(path.join(`${__dirname}/../client`)));
 app.set('view engine', 'ejs');
-app.use(imperio.init());
 
 /* ----------------------------------
  * --------      Routes      --------
  * ---------------------------------- */
 
  // App will serve up different pages for client & desktop
-app.get('/',
+app.get('/', imperio.init(),
   (req, res) => {
-    res.render('./../client/index.ejs');
+    if (req.imperio.isDesktop) {
+      res.render('./../client/index.ejs');
+    }
+    else if (req.imperio.isMobile) {
+      res.render('./../client/mobile.ejs');
+    }
+  }
+);
+// Nonce in URL
+app.get('/:nonce', imperio.init(),
+  (req, res) => {
+    if (req.imperio.isDesktop) {
+      res.render('./../client/index.ejs');
+    }
+    else if (req.imperio.isMobile) {
+      if (req.imperio.connected) {
+        res.render('./../client/mobileConn.ejs');
+      }
+      else {
+        res.render('./../client/mobile.ejs');
+      }
+    }
   }
 );
 // 404 error on invalid endpoint
