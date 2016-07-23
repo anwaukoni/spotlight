@@ -27,7 +27,12 @@ app.get('/', imperio.init(),
       res.render('./../client/index.ejs');
     }
     else if (req.imperio.isMobile) {
-      res.render('./../client/mobile.ejs');
+      if (req.imperio.connected) {
+        res.render('./../client/mobileConn.ejs');
+      }
+      else {
+        res.render('./../client/mobile.ejs');
+      }
     }
   }
 );

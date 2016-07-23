@@ -12,6 +12,9 @@ body {
 #game-wrap {
   text-align: center;
   height: 100vh;
+  background-image: url("./img/duck5.png");
+  background-position: center;
+  background-repeat: no-repeat;
 }
 #game-wrap h1 {
   margin: 0;
@@ -44,15 +47,24 @@ body {
 .calibrate-me {
   background-color: blue;
 }
-
 #top-left-feedback, #top-right-feedback,
 #bottom-left-feedback, #bottom-right-feedback {
   position: absolute;
-  width: 120px;
+  width: 200px;
   height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#reticle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: red;
 }
 
 /* ------------------------------------ */
